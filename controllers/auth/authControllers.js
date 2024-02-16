@@ -117,3 +117,28 @@ exports.verifyOtp = async(req,res)=>{
     }
     
 }
+
+exports.resetPassword = async(req,res)=>{
+    const {email, newPassword, confirmPassword} = req.body
+    if(!email || !newPassword || !confirmPassword){
+        return res.status(400).json({
+            message:"Enter Email, New Password and Confirm Password"
+        })
+    }
+    if(newPassword !=confirmPassword){
+        return res.status(400).json({
+            message:"Password don't match"
+        })
+    }
+    const userFound = await User.find({userEmail:email})
+    if(userFound.length==0){
+        return res.status(400).json({
+            message:"This email is not registered"
+        })
+    }
+    userFound[0].userPassword = bcrypt.hashSync(newPassword,10)
+    await userFound[0].save();
+    res.status(200).json({
+        message:"Password is successfully changed"
+    })
+}
