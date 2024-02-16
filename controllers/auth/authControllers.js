@@ -109,6 +109,8 @@ exports.verifyOtp = async(req,res)=>{
             message:"Invalid OTP"
         })
     }else{
+        userFound[0].otp = undefined 
+        await userFound[0].save()
         res.status(200).json({
             message:"Your OTP is Valid"
         })
