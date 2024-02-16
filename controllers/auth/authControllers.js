@@ -1,6 +1,7 @@
 const jwt= require('jsonwebtoken')
 const bcrypt = require('bcryptjs'); 
 const User = require('../../model/userModel');
+const sendEmail = require('../../services/sendEmail');
 
 exports.registerUser =async(req,res)=>{
     // console.log(req.body);
@@ -8,7 +9,7 @@ exports.registerUser =async(req,res)=>{
     const {email,phoneNumber,username,password} = req.body;
     if(!email || !phoneNumber || !password || !username){
         return res.status(400).json({
-            message:"Enter Phone,Email & Password.."
+            message:"Enter Phone,Email,Username & Password.."
         })
     }
     //Check email is already registered or not
@@ -60,4 +61,30 @@ exports.loginUser =async(req,res)=>{
             message:"Invalid Email or Password"
         })
     }
+}
+
+exports.forgotPassword = async(req,res)=>{
+    const {email} = req.body
+    if(!email){
+        return res.status(400).json({
+            message:"Enter an email"
+        })
+    }
+    const userFound = await User.find({userEmail:email})
+    if(userFound.length==0){
+        return res.status(400).json({
+            message:"This email is not registered"
+        })
+    }
+
+    //generate otp
+    const otp= Math.floor(Math.random() *10000);
+    await sendEmail({
+        email: email,
+        subject:"OTP for your new Password",
+        message: `Your OTP for Digital Mo:Mo is ${otp}`
+    })
+    res.json({
+        message:"Email sent successfully"
+    })
 }
