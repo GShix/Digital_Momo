@@ -1,8 +1,8 @@
 const express = require('express');
 const app = express();
 const { connectDatabase } = require('./database/database');
-const { registerUser, loginUser } = require('./controllers/auth/authControllers');
 
+const authRoute = require('./routes/authRoutes')
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -21,9 +21,8 @@ app.get('/',(req,res)=>{
 })
 
 //Register API
-app.post('/register',registerUser)
+app.use("",authRoute);
 //Login API
-app.post('/login',loginUser)
 
 const PORT = process.env.PORT;
 // listen server
