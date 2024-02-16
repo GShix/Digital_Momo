@@ -79,6 +79,8 @@ exports.forgotPassword = async(req,res)=>{
 
     //generate otp
     const otp= Math.floor(Math.random() *10000);
+    userFound[0].otp = otp;
+    await userFound[0].save();
     await sendEmail({
         email: email,
         subject:"OTP for your new Password",
