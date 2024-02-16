@@ -86,7 +86,32 @@ exports.forgotPassword = async(req,res)=>{
         subject:"OTP for your new Password",
         message: `Your OTP for Digital Mo:Mo is ${otp}`
     })
-    res.json({
+    res.status(200).json({
         message:"Email sent successfully"
     })
+}
+
+exports.verifyOtp = async(req,res)=>{
+    const {email, otp} = req.body
+    if(!email || !otp){
+        return res.status(400).json({
+            message:"Enter an email and otp"
+        })
+    }
+    const userFound = await User.find({userEmail:email})
+    if(userFound.length==0){
+        return res.status(400).json({
+            message:"This email is not registered"
+        })
+    }
+    if(userFound[0].otp !=otp){
+         res.status(400).json({
+            message:"Invalid OTP"
+        })
+    }else{
+        res.status(200).json({
+            message:"Your OTP is Valid"
+        })
+    }
+    
 }
