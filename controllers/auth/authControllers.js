@@ -110,6 +110,7 @@ exports.verifyOtp = async(req,res)=>{
         })
     }else{
         userFound[0].otp = undefined 
+        userFound[0].isOtpVerified = true
         await userFound[0].save()
         res.status(200).json({
             message:"Your OTP is Valid"
@@ -136,7 +137,13 @@ exports.resetPassword = async(req,res)=>{
             message:"This email is not registered"
         })
     }
+    if(userFound[0].isOtpVerified !==true){
+        return res.status(400).json({
+            message:"Your OTP is not verified"
+        })
+    }
     userFound[0].userPassword = bcrypt.hashSync(newPassword,10)
+    userFound[0].isOtpVerified = false
     await userFound[0].save();
     res.status(200).json({
         message:"Password is successfully changed"
