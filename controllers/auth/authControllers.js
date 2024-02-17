@@ -26,6 +26,11 @@ exports.registerUser =async(req,res)=>{
         userName : username,
         userPassword : bcrypt.hashSync(password,10)
     })
+    await sendEmail({
+        email: email,
+        subject:"Welcome to Digital Momo",
+        message: "It's glad to be here in with Digital Momo. We are here you to serve"
+    })
     res.status(201).json({
         message:"User is registered successfully.."
     })
