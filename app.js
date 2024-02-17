@@ -3,6 +3,7 @@ const app = express();
 const { connectDatabase } = require('./database/database');
 
 const authRoute = require('./routes/authRoutes')
+const productRoute = require('./routes/productRoutes')
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -21,7 +22,8 @@ app.get('/',(req,res)=>{
 })
 
 //Register API
-app.use("",authRoute);
+app.use("/api",authRoute);
+app.use("/api",productRoute);
 //Login API
 
 const PORT = process.env.PORT;
