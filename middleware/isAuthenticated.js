@@ -2,6 +2,7 @@ const jwt= require('jsonwebtoken');
 // const promisify = require('util').promisify
 const {promisify} = require('util');
 const User = require('../model/userModel');
+
 const isAuthenticated = async(req,res,next)=>{
     const token = req.headers.authorization
     // console.log(token)
@@ -34,7 +35,7 @@ const isAuthenticated = async(req,res,next)=>{
         }
         req.user = doesUserFound
 
-        //next()
+        next()
     } catch (error) {
         res.status(400).json({
             message:error.message
