@@ -24,19 +24,24 @@ const isAuthenticated = async(req,res,next)=>{
     // })
 
     //token verify-2
-    const decoded = await promisify(jwt.verify)(token, process.env.SECRET_KEY);
-    if(!decoded){
-        return res.status(403).json({
-            message:"Please Login"
+    try {
+        const decoded = await promisify(jwt.verify)(token, process.env.SECRET_KEY);
+        const doesUserFound = await User.findOne({_id:decoded.id})
+        if(!doesUserFound){
+            return res.status(400).json({
+                message:"User with this Token/id not found"
+            })
+        }
+        req.user = doesUserFound
+
+        //next()
+    } catch (error) {
+        res.status(400).json({
+            message:error.message
         })
     }
-    const doesUserFound = await User.findOne({_id:decoded.id})
-    if(!doesUserFound){
-        return res.status(400).json({
-            message:"User with this Token/id not found"
-        })
-    }
-    req.user = doesUserFound
-    //next()
+    
+    
+    
 }
 module.exports = isAuthenticated
