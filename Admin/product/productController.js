@@ -1,7 +1,7 @@
 const Product = require("../../model/productModel")
 
 exports.createProduct = (req,res)=>{
-    try {// console.log(file)
+    // console.log(file)
         const {productName,productDescription,productStockQty,productPrice,productStatus} = req.body
         if(!productName || !productDescription || !productPrice|| !productStatus || !productStockQty){
             return res.status(400).json({
@@ -19,14 +19,6 @@ exports.createProduct = (req,res)=>{
         res.status(200).json({
             message:"Product created successfully"
         })
-
-        
-    } catch (err) {
-        console.log(err.message)
-        res.status(500).json({
-            message:"Sth went wrong"
-        })
-    }
 }
 
 exports.getProducts = async(req,res)=>{
