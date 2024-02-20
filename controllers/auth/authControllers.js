@@ -55,7 +55,7 @@ exports.loginUser =async(req,res)=>{
     const matchPassword = bcrypt.compareSync(password,userFound[0].userPassword);
     if(matchPassword){
         const token = jwt.sign({id:userFound[0]._id },process.env.SECRET_KEY,{
-            expiresIn:'2d'
+            expiresIn:'5d'
         })
         res.status(200).json({
             message:"User logined successfully.",
