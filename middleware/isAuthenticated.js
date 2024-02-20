@@ -8,7 +8,7 @@ const isAuthenticated = async(req,res,next)=>{
     // console.log(token)
     if(!token){
         return res.status(400).json({
-            message:"Please Login"
+            message:"Please Login & get token"
         })
     }
     //token verify-1
