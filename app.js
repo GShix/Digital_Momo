@@ -8,6 +8,10 @@ const productRoute = require('./routes/productRoutes')
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
 
+//tell node to give access to upload folder
+app.use(express.static('uploads/')) // './uploads'
+// './' - give access to all code publically
+
 //Invoking dotenv(Telling nodejs to use .env)
 require('dotenv').config(); 
 
