@@ -51,9 +51,10 @@ exports.loginUser =async(req,res)=>{
             message:"This email is not registered."
         })
     }
+    //password match
     const matchPassword = bcrypt.compareSync(password,userFound[0].userPassword);
     if(matchPassword){
-        const token = jwt.sign({id:userFound._id },process.env.SECRET_KEY,{
+        const token = jwt.sign({id:userFound[0]._id },process.env.SECRET_KEY,{
             expiresIn:'2d'
         })
         res.status(200).json({
