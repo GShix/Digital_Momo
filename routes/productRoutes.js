@@ -1,4 +1,4 @@
-const {createProduct,getProducts,getproduct} = require('../controllers/Admin/product/productController')
+const {getProducts,getproduct, createProduct} = require('../controllers/Admin/product/productController')
 const isAuthenticated = require('../middleware/isAuthenticated')
 const catchAsync = require('../services/catchAsync')
 
@@ -8,7 +8,7 @@ const router = require('express').Router()
 
 // router.route('/product').post(isAuthenticated,restrictTo('admin'),upload.single('productImage'), createProduct)
 router.route('/products')
-.post((isAuthenticated, createProduct))
+.post(isAuthenticated,createProduct )
 .get((getProducts))
 
 //for single product
