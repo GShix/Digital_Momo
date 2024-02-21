@@ -65,3 +65,17 @@ exports.getproduct = async(req,res)=>{
         })
     }
 }
+
+//DELETE API
+exports.deleteProduct =async(req,res)=>{
+    const {id} = req.params
+    if(!id){
+        return res.json({
+            message:"Please provide product id"
+        })
+    }
+    await Product.findByIdAndDelete(id)
+    res.status(200).json({
+        message:"Product is deleted"
+    })
+}
