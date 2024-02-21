@@ -6,7 +6,7 @@ const sendEmail = require('../../services/sendEmail');
 exports.registerUser =async(req,res)=>{
     // console.log(req.body);
     //check all enteries are entered
-    const {email,phoneNumber,username,password} = req.body;
+    const {email,phoneNumber,username,password,role} = req.body;
     if(!email || !phoneNumber || !password || !username){
         return res.status(400).json({
             message:"Enter Phone,Email,Username & Password.."
@@ -24,7 +24,8 @@ exports.registerUser =async(req,res)=>{
         userEmail: email,
         userPhoneNumber: phoneNumber,
         userName : username,
-        userPassword : bcrypt.hashSync(password,10)
+        userPassword : bcrypt.hashSync(password,10),
+        role
     })
     await sendEmail({
         email: email,
