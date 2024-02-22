@@ -1,5 +1,5 @@
 const Product = require("../../../model/productModel")
-
+const fs = require('fs')
 exports.createProduct = (req,res)=>{
     // console.log(req.user)
     // return
@@ -78,4 +78,17 @@ exports.deleteProduct =async(req,res)=>{
     res.status(200).json({
         message:"Product is deleted"
     })
+}
+
+//Edit API
+exports.editProduct = async(req,res)=>{
+    //file hataunko laagi
+    fs.unlink('./uploads/pexels-aviz-4279165.jpg', (err)=>{
+        if(err){
+            console.log("Error occured",err)
+        }else{
+            console.log("File deleted")
+        }
+    })
+
 }
