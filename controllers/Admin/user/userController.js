@@ -1,7 +1,8 @@
 const User = require("../../../model/userModel")
 
 exports.getUsers = async (req,res)=>{
-    const users = await User.find()
+    const userId = req.user.id
+    const users = await User.find({_id:{$ne:userId}})
     if(users.length >1){
         res.status(200).json({
             message:"Users fetched successfully",
