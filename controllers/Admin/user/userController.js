@@ -14,3 +14,17 @@ exports.getUsers = async (req,res)=>{
         })
     }
 }
+
+exports.deleteUser= async(req,res)=>{
+    const {id} = req.params
+    if(!id){
+        return res.json({
+            message:"User not found with this id"
+        })
+    }
+    await User.findByIdAndDelete(id)
+    res.status(200).json({
+        message:`User with this id ${id} is deleted.`
+    })
+}
+
