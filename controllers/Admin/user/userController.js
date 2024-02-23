@@ -16,8 +16,15 @@ exports.getUsers = async (req,res)=>{
 }
 
 exports.deleteUser= async(req,res)=>{
-    const {id} = req.params
-    if(!id){
+    // const {id} = req.params
+    const userId = req.params.id
+    if(!userId){
+        return res.json({
+            message:"Please provide user id"
+        })
+    }
+    const user = await User.findById(userId)
+    if(!user){
         return res.json({
             message:"User not found with this id"
         })

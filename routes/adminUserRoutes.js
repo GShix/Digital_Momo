@@ -8,6 +8,6 @@ router.route('/users')
 .get(isAuthenticated,restrictTo('admin'), catchAsync(getUsers))
 
 router.route('/users/:id')
-.delete(isAuthenticated,restrictTo('admin'),(deleteUser))
+.delete(isAuthenticated,restrictTo('admin'),catchAsync(deleteUser))
 
 module.exports = router
