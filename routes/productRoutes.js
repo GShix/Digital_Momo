@@ -16,6 +16,6 @@ router.route('/products')
 router.route('/products/:id')
 .get(catchAsync(getproduct))
 .delete(isAuthenticated, restrictTo("admin"),catchAsync(deleteProduct))
-.patch(editProduct)
+.patch(isAuthenticated, restrictTo('admin'),upload.single('productImage'), catchAsync(editProduct))
 
 module.exports = router
