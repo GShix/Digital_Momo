@@ -5,6 +5,7 @@ const { connectDatabase } = require('./database/database');
 const authRoute = require('./routes/authRoutes')
 const productRoute = require('./routes/productRoutes')
 const adminUserRoute = require('./routes/adminUserRoutes')
+const userReviewRoute = require('./routes/userReviewRoutes')
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -30,6 +31,7 @@ app.get('/',(req,res)=>{
 app.use("/api",authRoute);
 app.use("/api",productRoute);
 app.use("/api",adminUserRoute);
+app.use("/api",userReviewRoute);
 //Login API
 
 const PORT = process.env.PORT;

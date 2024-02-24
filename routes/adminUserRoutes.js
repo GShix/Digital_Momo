@@ -1,5 +1,6 @@
 const router = require('express').Router()
-const { getUsers, deleteUser } = require('../controllers/Admin/user/userController')
+
+const { getUsers, deleteUser } = require('../controllers/Admin/userController')
 const isAuthenticated = require('../middleware/isAuthenticated')
 const restrictTo = require('../middleware/restrictTo')
 const catchAsync = require('../services/catchAsync')
