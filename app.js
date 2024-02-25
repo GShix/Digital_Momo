@@ -2,10 +2,10 @@ const express = require('express');
 const app = express();
 const { connectDatabase } = require('./database/database');
 
-const authRoute = require('./routes/authRoutes')
-const productRoute = require('./routes/productRoutes')
-const adminUserRoute = require('./routes/adminUserRoutes')
-const userReviewRoute = require('./routes/userReviewRoutes')
+const authRoute = require('./routes/auth/authRoutes')
+const productRoute = require('./routes/admin/productRoutes')
+const adminUserRoute = require('./routes/admin/adminUserRoutes')
+const userReviewRoute = require('./routes/user/userReviewRoutes')
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));

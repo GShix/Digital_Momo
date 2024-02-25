@@ -1,5 +1,5 @@
-const Product = require("../../model/productModel")
-const Review = require("../../model/reviewModel")
+const Product = require("../../../model/productModel")
+const Review = require("../../../model/reviewModel")
 
 exports.createReview = async(req,res)=>{
     const userId = req.user.id
@@ -25,48 +25,30 @@ exports.createReview = async(req,res)=>{
         message:"Review created successfully"
     })
 }
-exports.getProductReview = async(req,res)=>{
-    const productId = req.params.id
-    if(!productId){
-        return res.status(400).json({
-            message:"Please provid productId"
-        })
-    }
-    const productFound = await Product.findById(productId)
-    if(!productFound){
-        return res.status(400).json({
-            message:"Product with this id doesn't found"
-        })
-    }
-    const reviews = await Review.find({productId})
-    res.status(200).json({
-        message:"Review fetched successfully",
-        data: reviews
-    })
-    
-}
-// exports.getMyReview = async(req,res)=>{
-//     const userId = req.user.id
-//     const reviews = await Review.findById(userId)
-//     if(!reviews){
-//          res.status(400).json({
-//             message:"You have not give a review",
-//             reviews:[]
-//         })
-//     }else{
-//         res.status(200).json({
-//             message:"Review fetched successfully",
-//             data:reviews
-//         })
-//     }
-// }
 
-//Global function may like this
+exports.getMyReview = async(req,res)=>{
+    const userId = req.user.id
+    const reviews = await Review.find({userId})
+    if(reviews.length==0){
+         res.status(400).json({
+            message:"You have not give a review",
+            reviews:[]
+        })
+    }else{
+        res.status(200).json({
+            message:"Review fetched successfully",
+            data:reviews
+        })
+    }
+}
+
+// Global function may like this
 // exports.checkParamsId = (req,res)=>{
 //     res.status(400).json({
 //         message:"Please provid id "
 //     })
 // }
+
 exports.deleteReview = async(req,res)=>{
     const reviewId = req.params.id
     if(!reviewId){
@@ -74,7 +56,16 @@ exports.deleteReview = async(req,res)=>{
             message:"Review with this id not found"
         })
     }
+
+    //authorizating user
+    const userId = req.user.id
     const reviewFound = await Review.findById(reviewId)
+    const reviewOwnerId = reviewFound.userId
+    if(!reviewOwnerId !==userId){
+        return res.status(403).json({
+            message:"You don't have permission to delete this review."
+        })
+    }
     if(!reviewFound){
         return res.status(400).json({
             
