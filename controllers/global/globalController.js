@@ -33,8 +33,8 @@ exports.getproduct = async(req,res)=>{
     }else{
         res.status(200).json({
             message:"Product fetched successfully",
-            product,
-            productReviews
+            data: product,
+            data2:productReviews
         })
     }
 }

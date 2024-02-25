@@ -32,7 +32,7 @@ exports.getMyReview = async(req,res)=>{
     if(reviews.length==0){
          res.status(400).json({
             message:"You have not give a review",
-            reviews:[]
+            data:[]
         })
     }else{
         res.status(200).json({
