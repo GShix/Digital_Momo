@@ -38,9 +38,10 @@ exports.getProductReview = async(req,res)=>{
             message:"Product with this id doesn't found"
         })
     }
-    const reviews = await Review.findById(productId)
+    const reviews = await Review.find({productId})
     res.status(200).json({
-        message:"Review fetched successfully"
+        message:"Review fetched successfully",
+        data: reviews
     })
     
 }

@@ -1,4 +1,4 @@
-const User = require("../../model/userModel")
+const User = require("../../../model/userModel")
 
 exports.getUsers = async (req,res)=>{
     const userId = req.user.id
