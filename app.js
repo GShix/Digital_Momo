@@ -7,6 +7,7 @@ const productRoute = require('./routes/admin/productRoutes')
 const adminUserRoute = require('./routes/admin/adminUserRoutes')
 const userReviewRoute = require('./routes/user/userReviewRoutes')
 const profileRoute = require('./routes/user/profileRoute')
+const cartRoute = require('./routes/user/cartRoute')
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -34,10 +35,11 @@ app.use("/api/products",productRoute);
 app.use("/api/users",adminUserRoute);
 app.use("/api/reviews",userReviewRoute);
 app.use("/api/profile", profileRoute)
+app.use('/api/cart',cartRoute)
 //Login API
 
 const PORT = process.env.PORT;
 // listen server
 app.listen(PORT,()=>{
-    console.log("Server has started at PORT "+PORT);
+    console.log("Server has started at PORT "+ PORT);
 })

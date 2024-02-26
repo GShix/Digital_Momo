@@ -31,7 +31,8 @@ const userSchema = new Schema({
     isOtpVerified:{
         type: Boolean,
         default: false
-    }
+    },
+    cart:[{type:Schema.Types.ObjectId,ref:"Product"}]
 },{
         timestamps:true
 })
