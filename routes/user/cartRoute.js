@@ -4,6 +4,6 @@ const catchAsync = require('../../services/catchAsync')
 
 const router = require('express').Router()
 
-router.route('/').post(isAuthenticated,catchAsync(addToCart))
+router.route('/:id').post(isAuthenticated,catchAsync(addToCart))
 
 module.exports = router

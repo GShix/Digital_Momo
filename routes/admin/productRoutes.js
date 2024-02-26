@@ -9,7 +9,7 @@ const upload = multer({storage:storage})
 
 
 // router.route('/product').post(isAuthenticated,restrictTo('admin'),upload.single('productImage'), createProduct)
-router.route('/products')
+router.route('/')
 .post(isAuthenticated,restrictTo("admin") ,upload.single('productImage'),catchAsync(createProduct) )
 .get(catchAsync(getProducts))
 
