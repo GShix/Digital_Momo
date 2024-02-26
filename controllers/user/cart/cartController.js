@@ -22,3 +22,17 @@ exports.addToCart =async(req,res)=>{
         message:"Product added to cart"
     })
 }
+
+exports.getCartItems = async(req,res)=>{
+    const userId = req.user.id
+    // userData = await User.findById(userId).populate('cart')
+    userData = await User.findById(userId).populate({
+        path: "cart",
+        select:'-productStatus -__v'
+    })
+    res.status(200).json({
+        message:"Cart fetched successfully",
+        // data: userData
+        data: userData.cart
+    })
+}
