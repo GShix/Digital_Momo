@@ -15,11 +15,13 @@ exports.getMyProfile= async(req,res)=>{
 exports.updateProfile = async(req,res)=>{
     const userId= req.user.id
     const {userName, userEmail, userPhoneNumber} = req.body
-    await User.findByIdAndUpdate(userId,{userName,userEmail,userPhoneNumber},{
-        runValidators:true
+    const updateData = await User.findByIdAndUpdate(userId,{userName,userEmail,userPhoneNumber},{
+        runValidators:true,
+        new: true
     })
     res.status(200).json({
-        message:"Profile updated"
+        message:"Profile updated",
+        data:updateData
     })
 }
 
@@ -47,6 +49,7 @@ exports.updatePassword = async(req,res)=>{
             message:"Your password doesn't match"
         })
     }
+    //check old hashed pass and new pass(hased)
     const userData = await User.findById(userId)
     const hashedOldPass = userData.userPassword
     const isOldPasswordCorrect = bcrypt.compareSync(oldPassword,hashedOldPass)
@@ -55,6 +58,7 @@ exports.updatePassword = async(req,res)=>{
             message:"You don't have permission"
         })
     }
+    //password match vayo vane
     userData.userPassword = bcrypt.hashSync(newPassword,12)
     await userData.save()
     res.status(200).json({

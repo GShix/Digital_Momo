@@ -14,7 +14,7 @@ router.route('/products')
 .get(catchAsync(getProducts))
 
 //for single product
-router.route('/products/:id')
+router.route('/:id')
 .get(catchAsync(getproduct))
 .delete(isAuthenticated, restrictTo("admin"),catchAsync(deleteProduct))
 .patch(isAuthenticated, restrictTo('admin'),upload.single('productImage'), catchAsync(editProduct))

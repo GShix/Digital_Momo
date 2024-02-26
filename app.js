@@ -6,6 +6,7 @@ const authRoute = require('./routes/auth/authRoutes')
 const productRoute = require('./routes/admin/productRoutes')
 const adminUserRoute = require('./routes/admin/adminUserRoutes')
 const userReviewRoute = require('./routes/user/userReviewRoutes')
+const profileRoute = require('./routes/user/profileRoute')
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -28,10 +29,11 @@ app.get('/',(req,res)=>{
 })
 
 //Register API
-app.use("/api",authRoute);
-app.use("/api",productRoute);
-app.use("/api",adminUserRoute);
-app.use("/api",userReviewRoute);
+app.use("/api/auth",authRoute);
+app.use("/api/products",productRoute);
+app.use("/api/users",adminUserRoute);
+app.use("/api/reviews",userReviewRoute);
+app.use("/api/profile", profileRoute)
 //Login API
 
 const PORT = process.env.PORT;
