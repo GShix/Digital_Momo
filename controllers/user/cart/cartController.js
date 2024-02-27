@@ -36,3 +36,22 @@ exports.getCartItems = async(req,res)=>{
         data: userData.cart
     })
 }
+
+exports.deleteCardItem = async(req,res)=>{
+    const userId = req.user.id
+    const productId = req.params.id
+    const productFound = await Product.findById(productId)
+    if(!productFound){
+        return res.status(400).json({
+            message:"Product not found."
+        })
+    }
+    //get user cart
+    const user = await User.findById(userId);
+    user.cart = user.cart.filter((pId)=>{pId != productId})
+    await user.save();
+    res.status(200).json({
+        message:"Product Items deleted successfully"
+    })
+
+}
