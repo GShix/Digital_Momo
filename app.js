@@ -8,6 +8,8 @@ const adminUserRoute = require('./routes/admin/adminUserRoutes')
 const userReviewRoute = require('./routes/user/userReviewRoutes')
 const profileRoute = require('./routes/user/profileRoute')
 const cartRoute = require('./routes/user/cartRoute')
+// const ordersRoute = require('./routes/admin/ordersRoute')
+const orderRoute = require('./routes/user/orderRoute')
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -36,6 +38,8 @@ app.use("/api/users",adminUserRoute);
 app.use("/api/reviews",userReviewRoute);
 app.use("/api/profile", profileRoute)
 app.use('/api/cart',cartRoute)
+// app.use('/api/orders',ordersRoute)
+app.use('/api/orders',orderRoute)
 //Login API
 
 const PORT = process.env.PORT;
