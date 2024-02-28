@@ -11,7 +11,8 @@ const orderSchema = new Schema({
     shippingAddress:{type:String, required:true},
     orderStatus:{
         type:String,
-        enum:['pending','confirmed','cancelled','ontheway','preparation','delivered']
+        enum:['pending','confirmed','cancelled','ontheway','preparation','delivered'],
+        default:"pending"
     },
     paymentDetails:{
         method:{type:String,enum:['COD','Khalti']},
