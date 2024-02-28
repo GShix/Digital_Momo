@@ -88,3 +88,30 @@ exports.deleteMyOrder = async(req,res)=>{
         data:null
     })
 }
+
+exports.cancelMyOrder = async(req,res)=>{
+    const userId = req.user.id
+    const {id} = req.params
+    const orderFound = await Order.findById(id)
+    if(!orderFound){
+        return res.status(400).json({
+            messageL:"No order with this id"
+        })
+    }
+    //user authorization
+    if(orderFound.user !== userId){
+        return res.status(403).json({
+            message:"You don't have permission to delete this order"
+        })
+    }
+    if(orderFound.orderStatus !=="pending"){
+        return res.status(400).json({
+            message:"You can't cancel order when order is passed from pending status"
+        })
+    }
+    const updateOrder = await Order.findByIdAndUpdate(id,{orderStatus:"cancelled"})
+    res.status(200).json({
+        message:"Order cancelled",
+        data:updateOrder
+    })
+}
