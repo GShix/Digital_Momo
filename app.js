@@ -8,7 +8,7 @@ const adminUserRoute = require('./routes/admin/adminUserRoutes')
 const userReviewRoute = require('./routes/user/userReviewRoutes')
 const profileRoute = require('./routes/user/profileRoute')
 const cartRoute = require('./routes/user/cartRoute')
-// const ordersRoute = require('./routes/admin/ordersRoute')
+const adminOrdersRoute = require('./routes/admin/adminOrdersRoute')
 const orderRoute = require('./routes/user/orderRoute')
 //Tell to Express to change req to JSON:
 app.use(express.json())
@@ -34,7 +34,8 @@ app.get('/',(req,res)=>{
 //Register API
 app.use("/api/auth",authRoute);
 app.use("/api/products",productRoute);
-app.use("/api/users",adminUserRoute);
+app.use("/api/admin",adminUserRoute);
+app.use("/api/admin",adminOrdersRoute);
 app.use("/api/reviews",userReviewRoute);
 app.use("/api/profile", profileRoute)
 app.use('/api/cart',cartRoute)

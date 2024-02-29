@@ -63,6 +63,7 @@ exports.deleteOrder = async(req,res)=>{
     }
     await Order.findByIdAndDelete(id);
     res.status(200).json({
-        message:"Order deleted"
+        message:"Order deleted",
+        data:null
     })
 }
