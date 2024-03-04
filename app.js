@@ -57,4 +57,7 @@ const PORT = process.env.PORT;
 const io = new Server(server);
 io.on('connection',(socket)=>{
     console.log("User Connected")
+    socket.on('disconnect',()=>{
+        console.log("User disconnected")
+    })
 })
