@@ -10,8 +10,11 @@ const profileRoute = require('./routes/user/profileRoute')
 const cartRoute = require('./routes/user/cartRoute')
 const adminOrdersRoute = require('./routes/admin/adminOrdersRoute')
 const orderRoute = require('./routes/user/orderRoute')
-
 const paymentRoute = require('./routes/user/paymentRoute')
+
+//socket
+const {Server} = require('socket.io');
+
 //Tell to Express to change req to JSON:
 app.use(express.json())
 app.use(express.urlencoded({extended : true}));
@@ -48,6 +51,10 @@ app.use('/api/payment',paymentRoute)
 
 const PORT = process.env.PORT;
 // listen server
-app.listen(PORT,()=>{
+ const server = app.listen(PORT,()=>{
     console.log("Server has started at PORT "+ PORT);
+})
+const io = new Server(server);
+io.on('connection',(socket)=>{
+    console.log("User Connected")
 })
