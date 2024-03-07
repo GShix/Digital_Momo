@@ -65,3 +65,7 @@ io.on('connection',(socket)=>{
     })
     // console.log("A User is registered")
 })
+function getSocketIo(){
+    return io
+}
+module.exports.getSocketIo = getSocketIo
