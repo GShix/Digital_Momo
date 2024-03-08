@@ -44,15 +44,21 @@ exports.verifyPidx = async(req,res)=>{
         order[0].paymentDetails.method = "khalti";
         order[0].paymentDetails.status ='paid';
         await order[0].save();
-
-        io.emit("Payment",{message:"Payment Successfully"})
+        //get socket.id from users
+        io.connection('connection',(socket)=>{
+            io.to(socket.id).emit("payment",{message:"Payment Successfully"})
+        })
+        // io.emit("Payment",{message:"Payment Successfully"})
         console.log(order)
         //notify to frontend
         res.redirect("http://localhost:4000")
     }else{
+        io.connection('connection',(socket)=>{
+            io.to(socket.id).emit("payment",{message:"Payment Error"})
+        })
         //notify erro to frontend 
-        io.emit("Payment",{message:"Payment UnSuccessfully"})
-        res.redirect("http://localhost:4000/errorPage")
+        // io.emit("Payment",{message:"Payment UnSuccessfully"})
+        // res.redirect("http://localhost:4000/errorPage")
     }
     res.send(response.data)
 }

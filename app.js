@@ -55,16 +55,17 @@ const PORT = process.env.PORT;
     console.log("Server has started at PORT "+ PORT);
 })
 const io = new Server(server);
-io.on('connection',(socket)=>{
-    console.log("User Connected")
-    socket.on('register',(data)=>{
-        const {username, email,phone} = data 
+
+// io.on('connection',(socket)=>{
+//     console.log("User Connected")
+//     socket.on('register',(data)=>{
+//         const {username, email,phone} = data 
 
 
-        socket.emit('response',{message:"User is Registered"})
-    })
-    // console.log("A User is registered")
-})
+//         socket.emit('response',{message:"User is Registered"})
+//     })
+//     // console.log("A User is registered")
+// })
 function getSocketIo(){
     return io
 }
