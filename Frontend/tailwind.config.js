@@ -9,7 +9,7 @@ export default {
   },
   plugins: [
     // ...
-    require('@tailwindcss/aspect-ratio'),
+    import('@tailwindcss/aspect-ratio'),import('@tailwindcss/forms'), import('@material-tailwind/react')
   ],
 }
 
