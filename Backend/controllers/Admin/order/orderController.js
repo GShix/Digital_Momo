@@ -21,7 +21,7 @@ exports.getSingleOrder = async(req,res)=>{
     const orderFound = await Order.findById(id)
     if(!orderFound){
         return res.status(400).json({
-            messageL:"No order with this id"
+            message:"No order with this id"
         })
     }
     res.status(200).json({

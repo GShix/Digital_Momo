@@ -9,7 +9,7 @@ const Navbar = () => {
                 <div className="w-full px-6 flex justify-between lg:w-max md:px-0">
                     <a href="https://tailus.io/blocks/hero-section" aria-label="logo" className="flex space-x-2 items-center">
                         <img src="https://tailus.io/sources/blocks/food-delivery/preview/images/icon.png" className="w-12" alt="tailus logo" width="144" height="133"/>
-                        <span className="text-2xl font-bold text-yellow-900">Tailus <span className="text-yellow-700">Feedus</span></span>
+                        <span className="text-2xl font-bold text-yellow-900">Digital <span className="text-yellow-700">MoMo</span></span>
                     </a>
 
                     <button aria-label="humburger" id="hamburger" className="relative w-10 h-10 -mr-2 lg:hidden">
