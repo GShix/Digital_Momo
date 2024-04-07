@@ -1,6 +1,8 @@
 import React from 'react'
-
+import {useSelector} from 'react-redux'
 const Navbar = () => {
+    const items = useSelector((state)=>state.cart)
+    console.log(items)
   return (
     <div>
       <nav className="fixed z-10 w-full bg-white md:absolute md:bg-transparent">
@@ -33,7 +35,7 @@ const Navbar = () => {
                             </li>
                             <li>
                                 <a href="#" className="block md:px-4 transition hover:text-yellow-700">
-<span>Cart</span>
+<span>Cart<sup>{items.length}</sup></span>
                                 </a>
                             </li>
                         </ul>

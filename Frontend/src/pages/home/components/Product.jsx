@@ -1,8 +1,11 @@
 import axios from 'axios'
 import React, { useEffect, useState } from 'react'
+import {useDispatch} from 'react-redux'
+import { add } from '../../../store/cartSlice';
 
 const Product =() => {
     const [products,setProducts]= useState([]);
+    const dispatch = useDispatch();
     const fetchProducts = async()=>{
         try{
           const response = await axios.get('http://localhost:4000/api/products')
@@ -17,7 +20,10 @@ const Product =() => {
       useEffect(()=>{
         fetchProducts()
       },[])
-      console.log(products)
+      // console.log(products)
+      const addToCart = (product)=>{
+        dispatch(add(product))
+      }
   return (
     <div>
   <div className='items-center justify-center min-h-screen from-[#F9F5F3] via-[#F9F5F3] to-      [#F9F5F3] bg-gradient-to-br px-2'>
@@ -40,7 +46,7 @@ const Product =() => {
               <a target='_blank' href='foodiesapp://food/1001' className='block mt-10 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform bg-[#FFC933] rounded-[14px] hover:bg-[#FFC933DD] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80'>
                   View on foodies
               </a>
-            <a target='_blank' href="" className='block mt-1.5 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-[#F2ECE7] hover:text-[#000000dd] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80'>
+            <a target='' onClick={()=>addToCart(product)} className='block mt-1.5 w-full px-4 py-3 font-medium tracking-wide text-center capitalize transition-colors duration-300 transform rounded-[14px] hover:bg-[#F2ECE7] hover:text-[#000000dd] focus:outline-none focus:ring focus:ring-teal-300 focus:ring-opacity-80'>
                   Add to Cart
               </a>
           </div>
