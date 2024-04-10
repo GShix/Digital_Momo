@@ -1,6 +1,8 @@
 import React from 'react'
 import {useSelector} from 'react-redux'
+import {useNavigate} from 'react-router-dom'
 const Navbar = () => {
+    const Navigate = useNavigate();
     const items = useSelector((state)=>state.cart)
     console.log(items)
   return (
@@ -9,7 +11,7 @@ const Navbar = () => {
         <div className="container m-auto px-2 md:px-12 lg:px-7">
             <div className="flex flex-wrap items-center justify-between py-3 gap-6 md:py-4 md:gap-0">
                 <div className="w-full px-6 flex justify-between lg:w-max md:px-0">
-                    <a href="https://tailus.io/blocks/hero-section" aria-label="logo" className="flex space-x-2 items-center">
+                    <a href="" onClick={()=>Navigate('/')} aria-label="logo" className="flex space-x-2 items-center">
                         <img src="https://tailus.io/sources/blocks/food-delivery/preview/images/icon.png" className="w-12" alt="tailus logo" width="144" height="133"/>
                         <span className="text-2xl font-bold text-yellow-900">Digital <span className="text-yellow-700">MoMo</span></span>
                     </a>
@@ -34,7 +36,7 @@ const Navbar = () => {
                                 </a>
                             </li>
                             <li>
-                                <a href="#" className="block md:px-4 transition hover:text-yellow-700">
+                                <a href="#" onClick={()=>Navigate("/cart")} className="block md:px-4 transition hover:text-yellow-700">
 <span>Cart<sup>{items.length}</sup></span>
                                 </a>
                             </li>
