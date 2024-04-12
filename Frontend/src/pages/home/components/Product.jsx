@@ -1,29 +1,21 @@
-import axios from 'axios'
-import React, { useEffect, useState } from 'react'
-import {useDispatch} from 'react-redux'
+
+import React, { useEffect} from 'react'
+import {useDispatch, useSelector} from 'react-redux'
 import { add } from '../../../store/cartSlice';
+import { fetchProducts } from '../../../store/productSlice';
 
 const Product =() => {
-    const [products,setProducts]= useState([]);
     const dispatch = useDispatch();
-    const fetchProducts = async()=>{
-        try{
-          const response = await axios.get('http://localhost:4000/api/products')
-        // console.log(response.data.products)
-        if(response.status==200){
-            setProducts(response.data.products)
-        }
-        }catch(err){
-          console.log(err)
-        }
-      }
-      useEffect(()=>{
-        fetchProducts()
-      },[])
-      // console.log(products)
-      const addToCart = (product)=>{
-        dispatch(add(product))
-      }
+
+    const {data:products,status} = useSelector((state)=>state.product);
+
+    useEffect(()=>{
+      dispatch(fetchProducts())
+    },[])
+
+    const addToCart = (product)=>{
+      dispatch(add(product))
+    }
   return (
     <div>
   <div className='items-center justify-center min-h-screen from-[#F9F5F3] via-[#F9F5F3] to-      [#F9F5F3] bg-gradient-to-br px-2'>
@@ -32,7 +24,7 @@ const Product =() => {
           products.map((product)=>{
             return(
               <div key={product._id} className='max-w-md mx-auto'>
-          <div className='h-[236px]' style={{backgroundImage:"url(https://img.freepik.com/free-photo/pasta-spaghetti-with-shrimps-sauce_1220-5072.jpg?w=2000&t=st=1678041911~exp=1678042511~hmac=e4aa55e70f8c231d4d23832a611004f86eeb3b6ca067b3fa0c374ac78fe7aba6)",backgroundSize:"cover",backgroundPosition:"center"}}>
+          <div className='h-[236px]' style={{backgroundImage:`url(${product.productImgae})`,backgroundSize:"cover",backgroundPosition:"center"}}>
            </div>
           <div className='p-4 sm:p-6'>
             <p className='font-bold text-gray-700 text-[22px] leading-7 mb-1'>{product.productName}</p>
