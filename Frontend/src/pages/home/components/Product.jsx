@@ -16,6 +16,12 @@ const Product =() => {
     const addToCart = (product)=>{
       dispatch(add(product))
     }
+    if(status=="loading"){
+      return <h1>Loading</h1>
+    }
+    if(status=="error"){
+      return <h1>Error ! Something Went Wrong..</h1>
+    }
   return (
     <div>
   <div className='items-center justify-center min-h-screen from-[#F9F5F3] via-[#F9F5F3] to-      [#F9F5F3] bg-gradient-to-br px-2'>
