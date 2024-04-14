@@ -20,7 +20,7 @@ exports.registerUser =async(req,res)=>{
         })
     }
     //esle
-    await User.create({
+    const userData =await User.create({
         userEmail: email,
         userPhoneNumber: phoneNumber,
         userName : username,
@@ -33,7 +33,8 @@ exports.registerUser =async(req,res)=>{
         message: "It's glad to be here in with Digital Momo. We are here you to serve"
     })
     res.status(201).json({
-        message:"User is registered successfully.."
+        message:"User is registered successfully..",
+        data:userData
     })
 
 }
