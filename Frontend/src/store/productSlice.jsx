@@ -1,12 +1,7 @@
 import { createSlice } from '@reduxjs/toolkit';
 import axios from 'axios'
+import { STATUSES } from '../globals/misc/Statuses';
 
-
-const STATUSES = Object.freeze({
-    SUCCESS:"success",
-    ERROR:"error",
-    LOADING:"loading"
-})
 const productSlice = createSlice({
     name:'product',
     initialState:{
