@@ -3,10 +3,11 @@ import React, { useEffect} from 'react'
 import {useDispatch, useSelector} from 'react-redux'
 import { add } from '../../../store/cartSlice';
 import { fetchProducts } from '../../../store/productSlice';
+import { useNavigate } from 'react-router-dom';
 
 const Product =() => {
     const dispatch = useDispatch();
-
+    const navigate = useNavigate();
     const {data:products,status} = useSelector((state)=>state.product);
 
     useEffect(()=>{
@@ -29,7 +30,7 @@ const Product =() => {
         {
           products.map((product)=>{
             return(
-              <div key={product._id} className='max-w-md mx-auto'>
+              <div onClick={()=>navigate(`productdetails/${product._id}`)} key={product._id} className='max-w-md mx-auto'>
           <div className='h-[236px]' style={{backgroundImage:`url(${product.productImgae})`,backgroundSize:"cover",backgroundPosition:"center"}}>
            </div>
           <div className='p-4 sm:p-6'>

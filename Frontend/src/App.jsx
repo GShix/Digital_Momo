@@ -9,6 +9,7 @@ import Register from './pages/auth/register/Register'
 import {Provider} from 'react-redux'
 import store from './store/store'
 import Cart from './pages/cart/Cart'
+import ProductDetail from './pages/productDetail/ProductDetail'
 
 function App() {
   return (
@@ -22,6 +23,7 @@ function App() {
             <Route path='/login' element={<Login/>}/>
             <Route path='/register' element={<Register/>}/>
             <Route path='/cart' element={<Cart/>}/>
+            <Route path='/productdetails/:id' element={<ProductDetail/>}/>
           </Routes>
         </BrowserRouter>
       </Provider>
