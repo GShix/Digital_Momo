@@ -7,7 +7,7 @@ import { STATUSES } from '../../../globals/misc/Statuses';
 const Login = () => {
   const Navigate = useNavigate();
   const dispatch = useDispatch();
-  const {data,status} = useSelector((state)=>state.auth);
+  const {data,token,status} = useSelector((state)=>state.auth);
   const [userData,setUserData] =useState({
     email:"",
     password:""
@@ -19,7 +19,7 @@ const Login = () => {
       [name]:value
     })
   }
-  console.log(userData)
+  // console.log(userData)
   const handleSubmit =(e)=>{
     e.preventDefault();
     dispatch(loginUser(userData))

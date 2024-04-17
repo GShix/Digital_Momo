@@ -1,6 +1,6 @@
 import { createSlice } from '@reduxjs/toolkit';
-import axios from 'axios'
 import { STATUSES } from '../globals/misc/Statuses';
+import API from '../http';
 
 const productSlice = createSlice({
     name:'product',
@@ -24,7 +24,7 @@ export function fetchProducts(){
     return async function fetchProductThunk(dispatch){
         dispatch(setStatus(STATUSES.LOADING));
         try {
-            const response = await axios.get('http://localhost:4000/api/products');
+            const response = await API.get('/products');
             dispatch(setProducts(response.data.products));
             dispatch(setStatus(STATUSES.SUCCESS));
         } catch (error) {
