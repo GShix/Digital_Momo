@@ -1,6 +1,16 @@
-import React from 'react'
+import React, { useEffect } from 'react'
+import { useDispatch, useSelector } from 'react-redux';
+import { fetchProductDetails } from '../../../../store/productSlice';
 
-const ProductDeta = () => {
+const ProductDeta = (props) => {
+  const productId = props.id
+  const dispatch = useDispatch();
+  const {selectedProduct,status}=useSelector((state)=>state.product)
+  console.log(selectedProduct,status)
+  
+  useEffect(()=>{
+    dispatch(fetchProductDetails(productId))
+  },[])
   return (
     <div>
       <section className="text-gray-700 body-font overflow-hidden bg-white">
