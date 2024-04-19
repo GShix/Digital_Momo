@@ -22,7 +22,7 @@ const productSlice = createSlice({
         
     }
 })
-export const {setProducts,setStatus} = productSlice.actions
+export const {setProducts,setStatus,setselectedProduct} = productSlice.actions
 export default productSlice.reducer
 
 export function fetchProducts(){
@@ -42,9 +42,8 @@ export function fetchProductDetails(productId){
     return async function fetchProductDetailsThunk(dispatch){
         dispatch(setStatus(STATUSES.LOADING));
         try {
-            const response = await API.get("/products/+productId");
-            console.log(response)
-            dispatch(setselectedProduct(response.data.data));
+            const response = await API.get(`/products/${productId}`);
+            dispatch(setselectedProduct(response.data.data))
             dispatch(setStatus(STATUSES.SUCCESS));
         } catch (error) {
             console.log(error);
